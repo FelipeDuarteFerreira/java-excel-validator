@@ -70,6 +70,7 @@ public class XSSFExcelValidator {
 		this._activeSheet = this.workbook.getSheet(name);
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void _initializeHeaders(int headerRowIndex) {
 		this._header = new TreeMap<>();
 		this._headerRow = headerRowIndex;
@@ -85,7 +86,7 @@ public class XSSFExcelValidator {
 		
 		while(iterator.hasNext()) {
 			Cell headerCell = iterator.next();
-			if(headerCell == null || headerCell.getCellType() != CellType.STRING) continue; // skipping if not an header column
+			if(headerCell == null || headerCell.getCellTypeEnum() != CellType.STRING) continue; // skipping if not an header column
 			String columnName = headerCell.getStringCellValue();
 			this._header.put(headerCell.getColumnIndex(), columnName);
 			this._mappedValidations.put(columnName, new ArrayList<ICellValidator>());
